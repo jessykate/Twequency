@@ -33,11 +33,14 @@ class FormHandler(tornado.web.RequestHandler):
         print 'Arguments were:'
         print arguments
         friends = get_friends(arguments['username'][0])       
-        print friends
-        self.render('results.html', friends=json.dumps(friends) )
+        print friends[0]
+    
+    
+        self.render('results.html', friends=friends, url=settings["url"] )
 
 settings = {
     "static_path": os.path.join(os.path.dirname(__file__), "static"),
+    "url": "http://www.twitilitics.com",
 }
 application = tornado.web.Application([
         (r'/', MainHandler),

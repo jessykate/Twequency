@@ -41,6 +41,7 @@ def get_friends(username):
         per_day = sum([v['frequency'] for v in friends.values()])
         for k,v in friends.iteritems():
             v['percent'] = v['frequency']/float(per_day)
+        
 
     return sort_by_frequency(friends)
 

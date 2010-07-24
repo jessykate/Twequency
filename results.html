@@ -1,10 +1,96 @@
 <html>
   <head>
     <link rel="stylesheet" href="/static/style.css" type="text/css">
+    <script type="text/javascript" src="/static/jquery-1.4.2.min.js"></script> 
+    <script type="text/javascript" src="/static/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript"> 
+      $(document).ready(function() 
+        { 
+            $("#frequency_table").tablesorter( {sortList: [[0,0], [1,0]]} ); 
+        } 
+      );
+    </script>
+    <script type="text/javascript">
+      $().ready(function() {
+        $('#submit_button').hide();
+
+        $('#input_username').bind('focus', function() {
+          if (this.value == 'Twitter handle') {
+            this.value = '';
+          }
+        }).bind('blur', function() {
+          if (!this.value) {
+            this.value = 'Twitter handle';
+          }
+        });
+      });
+
+    </script>
   </head>
   <body>
-    <div class="main">
-    {{ friends }}
+    <div class="main">        
+      <div id="header">
+        <div class="container">
+
+
+        </div>
+      </div>
+    
+      <div id="content">
+        <div class="container">
+          <table id="frequency_table" class="tablesorter">
+            <thead>
+              <tr>
+                <th>Screen Name</th>
+                <th>Frequency</th>
+                <th>Percent</th>
+                <th>Total Tweets</th>
+                <th>Account Created</th>
+                <th>Tweet This</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for friend in friends %}
+                <tr>
+                <td><a href="http://www.twitter.com/{{ friend[0] }}">{{ friend[0] }}</a></td>
+                <td>{{ friend[1]['frequency'] }}</td>
+                <td>{{ friend[1]['percent'] }}</td>
+                <td>{{ friend[1]['statuses'] }}</td>
+                <td>{{ friend[1]['created'] }}</td>   
+                <td><a href="http://twitter.com/home?status=.@{{ friend[0] }}+is+ranked+number+{{ friend[1]['created'] }}+of+the+most+prolific+people+I+follow+at+{{ friend[1]['percent'] }}%+of+my+daily+tweets.+What's+yours?+{{ url }}">Share</a></td>
+                </tr>
+                {% end %}
+            </tbody>
+          </table>
+          <div id="right">
+            <div id="prolific">
+              <a href="http://www.twitter.com/{{ friends[0][0] }}">{{ friends[0][0] }}</a> is your most prolific friend with {{ friends[0][1]['percent'] }}% of your daily tweets.  <br>
+              <a href="http://twitter.com/home?status=The+most+prolific+person+I+follow+is+@{{ friends[0][0] }}+at+{{ friends[0][1]['percent'] }}%+of+my+daily+tweets.+What's+yours?+{{ url }}">Tweet this</a> |
+              <a href="http://twitter.com/home?status=DM+{{ friends[0][0] }}+You+are+the+most+prolific+person+I+follow+at+{{ friends[0][1]['percent'] }}%+of+my+daily+tweets.+I+cannot+keep+up!+Determined+by+{{ url }}">Warn them</a>
+            </div>
+            <div id="chart">
+            </div>
+          </div>
+    
+          <div class="clear"></div>
+    
+          <div id="search_again">
+            Have more accounts? <span id="emph">Go ahead, be a cold-hearted $*&@#%.</span> Search for more accounts to find who is clogging up your twitter stream.
+            <div class="form">
+              <form action="submit" method="get">
+      	        <input type="text" name="username" id="input_username" value="Twitter handle"><br>
+      	        <input type="submit" value="Submit" id="submit_button">
+              </form>    
+            </div>
+        </div>
+      </div>
+   
+      <div id="footer">
+        <div class="container">  
+        
+        </div>
+      </div>
+
     </div>
   </body>
 </html>
