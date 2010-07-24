@@ -4,7 +4,11 @@
 Shows twitter friends sorted by tweet frequency.
 '''
 
-import urllib, urllib2, json, datetime
+import urllib, urllib2, datetime
+try:
+    import json
+except:
+    import simplejson as json
 
 def get_friends(username):
     friends = {}
