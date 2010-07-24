@@ -1,0 +1,39 @@
+<html>
+<head>
+  <link rel="stylesheet" href="/static/style.css" type="text/css">
+  <script src="/static/jquery-1.4.2.min.js"></script>
+  <script type="text/javascript">
+    $().ready(function() {
+      $('#submit_button').hide();
+
+      $('#input_username').bind('focus', function() {
+        if (this.value == 'Twitter handle') {
+          this.value = '';
+        }
+      }).bind('blur', function() {
+        if (!this.value) {
+          this.value = 'Twitter handle';
+        }
+      });
+    });
+
+  </script>
+  
+</head>
+<body>
+  <div class="main">
+    <div class="description">
+      Got too many tweets? <span id="emph">Go ahead, be a cold-hearted
+      $*&@#%.</span> See who's filling up your tweet stream, and
+      choose who to unfollow based on the cold, hard facts.
+    </div>
+    <div class="form">
+      <form action="submit" method="get">
+	<input type="text" name="username" id="input_username"
+	       value="Twitter handle"><br>
+	<input type="submit" value="Submit" id="submit_button">
+      </form>    
+    </div>
+  </div>
+</body>
+</html>

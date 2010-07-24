@@ -1,0 +1,56 @@
+
+body {
+    font-size: 24px;
+    color: #333333;
+    text-align: center;
+}
+
+.main {
+    width: 80%;
+    margin: auto;
+    //background: #ffeeff;
+    height: 100%;
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    -moz-border-radius: 4px; 
+    -webkit-border-radius: 4px;    
+}
+
+.description {
+    text-align: justify;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+.description:first-letter {
+    font-size: 4em;
+}
+
+#emph {
+    font-style: italic;
+    color: #666666;
+}
+
+#input_username {
+    width: 300px;
+    height: 60px;
+    font-size: 28px;
+    color: #666;
+    text-align: center;
+    border:none;
+    -moz-border-radius: 10px; 
+    -webkit-border-radius: 10px;
+//    background: #33ccff;
+    background: #44ddff;
+}
+
+#chart {
+    float:left;
+//    width: 100%;
+//    height: 100%;
+}
+
+#input_username:focus {
+    outline: none;
+}
