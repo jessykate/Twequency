@@ -10,6 +10,20 @@ try:
 except:
     import simplejson as json
 
+
+def list_members(username, list_id):
+    members = {}
+    cursor = -1
+    base = "http://api.twitter.com/1/%s/%s/members.json" % (username, list_id)
+    while cursor:
+        args = urllib.urlencode({'cursor': cursor})
+        fp = urllib2.urlopen(base+args)
+        results = json.loads(fp.read())
+        cursor = results['next_cursor']
+        print "%d results in this API call" % len(results['users'])
+        for user in results['users']:
+     
+
 def get_friends(username):
     friends = {}
     results = True
@@ -22,6 +36,7 @@ def get_friends(username):
         fp = urllib2.urlopen(base+args)
         results = json.loads(fp.read())
         cursor = results['next_cursor']
+        print "%d results in this API call" % len(results['users'])
         for user in results['users']:
             print 'processing %s...' % user['screen_name']
             statuses = int(user['statuses_count'])
