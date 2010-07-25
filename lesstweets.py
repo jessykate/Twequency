@@ -22,7 +22,7 @@ def list_members(username, list_id):
         cursor = results['next_cursor']
         print "%d results in this API call" % len(results['users'])
         for user in results['users']:
-     
+            pass     
 
 def get_friends(username):
     friends = {}
