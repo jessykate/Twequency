@@ -5,6 +5,26 @@ body {
     text-align: center;
 }
 
+.container {
+    margin: 0 auto; 
+    width:1000px;
+}
+
+#header {
+    height: 100px;
+	-moz-border-radius: 35px 35px 35px 35px;
+	-webkit-border-radius: 35px 35px 35px 35px;
+	padding: 22px;
+	background: -moz-linear-gradient(center top, #44ddff 0%,#ffffff 58%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #44ddff),color-stop(0.58, #ffffff));
+    
+}
+
+#footer {
+    height: 50px;
+    
+}
+
 .main {
     width: 80%;
     margin: auto;
@@ -19,12 +39,12 @@ body {
 
 .description {
     text-align: justify;
-    padding-top: 50px;
+    padding-top: 150px;
     padding-bottom: 30px;
 }
 
 .description:first-letter {
-    font-size: 4em;
+    font-size: 3em;
 }
 
 #emph {
@@ -53,4 +73,74 @@ body {
 
 #input_username:focus {
     outline: none;
+}
+
+#prolific{
+    padding: 15px;
+    
+}
+
+#graph {
+    
+    
+}
+
+.clear {
+    clear:both;
+    
+}
+
+#search_again {
+    padding-top: 50px;
+    float:center;
+    padding-left: 150px;
+    padding-right: 150px;
+}
+
+/* tables */
+
+#frequency_table {
+    float: left;
+    width: 60%;
+   
+    
+}
+
+table.tablesorter {
+	font-family:arial;
+	background-color: #CDCDCD;
+	margin:10px 0pt 15px;
+	font-size: 8pt;
+	width: 100%;
+	text-align: left;
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+	background-color: #e6EEEE;
+	border: 1px solid #FFF;
+	font-size: 8pt;
+	padding: 4px;
+}
+table.tablesorter thead tr .header {
+	background-image: url("bg.gif");
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.tablesorter tbody td {
+	color: #3D3D3D;
+	padding: 4px;
+	background-color: #FFF;
+	vertical-align: top;
+}
+table.tablesorter tbody tr.odd td {
+	background-color:#F0F0F6;
+}
+table.tablesorter thead tr .headerSortUp {
+	background-image: url("asc.gif");
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url("desc.gif");
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+background-color: #44ddff;
 }
