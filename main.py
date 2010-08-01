@@ -19,7 +19,7 @@ try:
 except:
     import simplejson as json
 import urllib, urllib2, datetime
-from Twequency import get_friends
+from lesstweets import get_friends
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -33,9 +33,6 @@ class FormHandler(tornado.web.RequestHandler):
         print 'Arguments were:'
         print arguments
         friends = get_friends(arguments['username'][0])       
-        print friends[0]
-    
-    
         self.render('results.html', friends=friends, url=settings["url"] )
 
 settings = {
