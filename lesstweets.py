@@ -38,7 +38,6 @@ def get_friends(username):
         cursor = results['next_cursor']
         print "%d results in this API call" % len(results['users'])
         for user in results['users']:
-            print 'processing %s...' % user['screen_name']
             statuses = int(user['statuses_count'])
             dt = user['created_at']
             # slice out the timezone
