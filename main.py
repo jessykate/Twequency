@@ -32,8 +32,51 @@ class FormHandler(tornado.web.RequestHandler):
         arguments = self.request.arguments
         print 'Arguments were:'
         print arguments
-        friends = get_friends(arguments['username'][0])       
-        self.render('results.html', friends=friends, url=settings["url"] )
+        self.username = self.get_argument('username')
+        friends = get_friends(self.username)       
+        print friends[1]
+        img_url = self.make_chart(friends)
+        print img_url
+        self.render('results.html', username = self.username, friends=friends, 
+                    url=settings["url"], chart_url = img_url )
+
+
+    def make_chart(self, friends):
+        # create a unique filename for this user and this particular friend
+        # set. if the user or friendset changes, the filename won't match. 
+        sum_f = sum([friend[1]['frequency'] for friend in friends])
+        uid_file = '/tmp/' + self.username + str(sum_f)  + '.png'
+        # the app will access this file via a url in the static media
+        # directory:
+        img_path = '/static/charts/' + uid_file[5:]
+
+        if os.path.exists(uid_file):
+            return img_path
+        
+        names_list = [friend[0] for friend in friends]
+        names = ','.join(names_list)
+        percents_list = [str(friend[1]['percent']) for friend in friends]
+        percents = 't:' + ','.join(percents_list)
+        # round up to the nearest 10
+        max_percent = max(friend[1]['percent'] for friend in friends])
+        max_y = 10*((max_percent/10)+1)
+
+        base_url = "http://chart.apis.google.com/chart?"
+        args = {
+            'cht' : 'ls',
+            'chs' : '600x200',
+            'chxt' : 'x,y',
+            'chd' : percents,
+            'chds' : max_y
+        }
+
+        print base_url + urllib.urlencode(args)
+        fp = urllib2.urlopen(base_url, urllib.urlencode(args))
+        chart = open(uid_file, 'w')
+        chart.write(fp.read())
+        chart.close()
+
+        return img_path
 
 settings = {
     "static_path": os.path.join(os.path.dirname(__file__), "static"),

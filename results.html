@@ -1,5 +1,6 @@
 <html>
   <head>
+    <title>Less Tweets: {{ username }}</title>
     <link rel="stylesheet" href="/static/style.css" type="text/css">
     <script type="text/javascript" src="/static/jquery-1.4.2.min.js"></script> 
     <script type="text/javascript" src="/static/jquery.tablesorter.min.js"></script>
@@ -31,13 +32,15 @@
     <div class="main">        
       <div id="header">
         <div class="container">
-
-
         </div>
       </div>
     
       <div id="content">
         <div class="container">
+        <div id="thechart">
+        <img src="{{ chart_url }}">
+        </div>
+          <div class="maintable">
           <table id="frequency_table" class="tablesorter">
             <thead>
               <tr>
@@ -62,6 +65,7 @@
                 {% end %}
             </tbody>
           </table>
+          </div>
           <div id="right">
             <div id="prolific">
               <a href="http://www.twitter.com/{{ friends[0][0] }}">{{ friends[0][0] }}</a> is your most prolific friend with {{ friends[0][1]['percent'] }}% of your daily tweets.  <br>
