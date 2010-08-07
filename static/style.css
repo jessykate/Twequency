@@ -11,13 +11,10 @@ body {
 }
 
 #header {
-    height: 100px;
-	-moz-border-radius: 35px 35px 35px 35px;
-	-webkit-border-radius: 35px 35px 35px 35px;
-	padding: 22px;
-	background: -moz-linear-gradient(center top, #44ddff 0%,#ffffff 58%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #44ddff),color-stop(0.58, #ffffff));
-    
+    //height: 50px; 
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 20px;
 }
 
 #footer {
@@ -25,16 +22,25 @@ body {
     
 }
 
-.main {
-    width: 80%;
+#main {
+    width: 90%;
     margin: auto;
     //background: #ffeeff;
     height: 100%;
     margin-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
-    -moz-border-radius: 4px; 
-    -webkit-border-radius: 4px;    
+    //-moz-border-radius: 4px; 
+    //-webkit-border-radius: 4px;    
+	-moz-border-radius: 35px 35px 35px 35px;
+	-webkit-border-radius: 35px 35px 35px 35px;
+	background: -moz-linear-gradient(center top, #44ddff 0%,#ffffff 28%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #44ddff),color-stop(0.72, #ffffff));
+}
+
+#perday {
+    margin-top:20px;
+    margin-bottom: 20px;
 }
 
 .description {
@@ -77,7 +83,8 @@ body {
 
 #prolific{
     padding: 15px;
-    
+    float: right;
+    width: 30%;    
 }
 
 #graph {
@@ -99,9 +106,14 @@ body {
 
 /* tables */
 
+.maintable {
+    width: 60%;
+    float: left;
+
+}
+
 #frequency_table {
     float: left;
-    width: 60%;
    
     
 }
@@ -125,12 +137,14 @@ table.tablesorter thead tr .header {
 	background-repeat: no-repeat;
 	background-position: center right;
 	cursor: pointer;
+    padding-right: 15px;
 }
 table.tablesorter tbody td {
 	color: #3D3D3D;
 	padding: 4px;
 	background-color: #FFF;
-	vertical-align: top;
+    min-width: 60px;
+    text-align: center;
 }
 table.tablesorter tbody tr.odd td {
 	background-color:#F0F0F6;
