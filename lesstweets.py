@@ -21,7 +21,7 @@ try:
 except:
     import simplejson as json
 import urllib, urllib2, datetime
-from lesstweets import get_friends
+from lib import get_friends
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
