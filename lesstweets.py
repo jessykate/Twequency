@@ -4,7 +4,7 @@
 Shows twitter friends sorted by tweet frequency.
 '''
 
-import urllib, urllib2, datetime
+import urllib, urllib2, datetime, re
 try:
     import json
 except:
@@ -23,6 +23,22 @@ def list_members(username, list_id):
         print "%d results in this API call" % len(results['users'])
         for user in results['users']:
             pass     
+
+def truncate_custom(number):
+    # truncate the percent to two places, unless the number is too small,
+    # and then truncate it to two non-zero decimal places. 
+    print number
+    number = str(number)
+    if number == 0:
+        number_truncated = 0
+    elif number < 0.01:
+        number_truncated = re.match('[0.]+\d\d', number).group()
+    elif len(number[number.find('.')+1:]) < 2:
+        number_truncated = number
+    else:
+        number_truncated = re.match('\d+\.\d\d', number).group()
+    return number_truncated
+
 
 def get_friends(username):
     friends = {}
@@ -45,7 +61,7 @@ def get_friends(username):
             created = datetime.datetime.strptime(created_string, "%a %b %d %H:%M:%S %Y")        
             days = (datetime.datetime.now() - created).days
             friends[user['screen_name']] = {
-                'created': dt, #store the original string version 
+                'created': created.strftime("%b %d, %Y"),
                 'statuses': statuses,
                 # make frequency a float for those who tweet < once/day
                 'frequency': float(statuses)/float(days)
@@ -54,8 +70,13 @@ def get_friends(username):
         # what percent of their daily tweets does this person represent?
         per_day = sum([v['frequency'] for v in friends.values()])
         for k,v in friends.iteritems():
-            v['percent'] = 100.0*(v['frequency']/float(per_day))
+            percent = 100.0*(v['frequency']/float(per_day))
+            v['percent'] = float(truncate_custom(percent))
+
+            frequency = v['frequency']
+            v['frequency'] = float(truncate_custom(frequency))
         
+
 
     return sort_by_frequency(friends)
 
@@ -78,21 +99,21 @@ if __name__ == '__main__':
     username = raw_input("enter your twitter handle: ")
     friends = get_friends(username)
 
+    fp = open('friends.json', 'w')
+    fp.write(json.dumps(friends))
+    fp.close()
+
     per_day = 0
     num_friends = 0
     for k,v in friends:        
         per_day += v['frequency']
         num_friends += 1
 
-    # what percent of your daily tweets does this person represent?
-    for k,v in friends:
-        v['percent'] = v['frequency']/float(per_day)
-
     print "Screen Name\t\tFrequency/Day\t\tPercent/day"
     for k,v in friends:
         f = v['frequency']
         p = v['percent']
-        print "%s\t\t%f\t\t%f" % (k, f, p)
+        print "%s\t\t%s\t\t%s" % (k, f, p)
     print ''    
     print 'average number of tweets you receive per day: %d' % per_day
     print "%d friends" % num_friends
