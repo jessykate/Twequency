@@ -1,100 +1,171 @@
 <html>
   <head>
-    <title>Less Tweets: {{ username }}</title>
-    <link rel="stylesheet" href="/static/style.css" type="text/css">
-    <script type="text/javascript" src="/static/jquery-1.4.2.min.js"></script> 
-    <script type="text/javascript" src="/static/jquery.tablesorter.min.js"></script>
-    <script type="text/javascript"> 
-      $(document).ready(function() 
-        { 
-            $("#frequency_table").tablesorter( {sortList: [[1,1]], 
-                                                headers: {5: {sorter: false },
-                                                          4: {sorter: 'shortDate'}
-                                                        } 
-                                                    } 
-                                              ); 
-        } 
-      );
-    </script>
-    <script type="text/javascript">
-      $().ready(function() {
-        $('#submit_button').hide();
+	<title>Less Tweets: {{ username }}</title>
+	<link href='http://fonts.googleapis.com/css?family=Lobsterq' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/static/style.css" type="text/css">
+	<script type="text/javascript" src="/static/jquery-1.4.2.min.js"></script> 
+	<script type="text/javascript" src="/static/jquery.tablesorter.min.js"></script>
+	<script type="text/javascript"> 
+	  $(document).ready(function() 
+		{ 
+			$("#frequency_table").tablesorter( {sortList: [[1,1]], 
+												headers: {5: {sorter: false },
+														  4: {sorter: 'shortDate'}
+														} 
+													} 
+											  ); 
+		} 
+	  );
+	</script>
+	<script type="text/javascript">
+	  $().ready(function() {
+		$('#submit_button').hide();
 
-        $('#input_username').bind('focus', function() {
-          if (this.value == 'Twitter handle') {
-            this.value = '';
-          }
-        }).bind('blur', function() {
-          if (!this.value) {
-            this.value = 'Twitter handle';
-          }
-        });
-      });
+		$('#input_username').bind('focus', function() {
+		  if (this.value == 'Twitter handle') {
+			this.value = '';
+		  }
+		}).bind('blur', function() {
+		  if (!this.value) {
+			this.value = 'Twitter handle';
+		  }
+		});
+	  });
 
-    </script>
+	</script>
   </head>
   <body>
-    <div id="main">        
-        <div id="header">
-        <h1>zOMG That's a lot of tweets!</h1>
-        </div>
-    
-      <div id="content">
-        <div class="container">
-         <div id="perday">
-            You receive an average of <em>{{int(round(per_day))}}</em> tweets per day. 
-         </div>
-         <div class="maintable">
-          <table id="frequency_table" class="tablesorter">
-            <thead>
-              <tr>
-                <th>Screen Name</th>
-                <th>Frequency</th>
-                <th>Percent</th>
-                <th>Total Tweets</th>
-                <th>Tweeting Since</th>
-                <th>Tweet</th>
-              </tr>
-            </thead>
-            <tbody>
-                {% for friend in friends %}
-                <tr>
-                <td><a href="http://www.twitter.com/{{ friend[0] }}">{{ friend[0] }}</a></td>
-                <td>{{ friend[1]['frequency'] }}</td>
-                <td>{{ friend[1]['percent'] }}%</td>
-                <td>{{ friend[1]['statuses'] }}</td>
-                <td>{{ friend[1]['created'] }}</td>   
-                <td><a href="http://twitter.com/home?status=.@{{ friend[0] }}+is+ranked+number+{{ friend[1]['created'] }}+of+the+most+prolific+people+I+follow+at+{{ friend[1]['percent'] }}%+of+my+daily+tweets.+What's+yours?+{{ url }}">Share</a></td>
-                </tr>
-                {% end %}
-            </tbody>
-          </table>
-          </div><!-- end maintable -->
-          <div id="right">
-            <div id="prolific">
-              <a href="http://www.twitter.com/{{ friends[0][0] }}">{{ friends[0][0] }}</a> is your most prolific friend with {{ friends[0][1]['percent'] }}% of your daily tweets.  <br>
-              <a href="http://twitter.com/home?status=The+most+prolific+person+I+follow+is+@{{ friends[0][0] }}+at+{{ friends[0][1]['percent'] }}%+of+my+daily+tweets.+What's+yours?+{{ url }}">Tweet this</a> |
-              <a href="http://twitter.com/home?status=DM+{{ friends[0][0] }}+You+are+the+most+prolific+person+I+follow+at+{{ friends[0][1]['percent'] }}%+of+my+daily+tweets.+I+cannot+keep+up!+Determined+by+{{ url }}">Warn them</a>
-            </div>
-          </div><!-- end right -->
-    
-          <div class="clear"></div>
-    
-          <div id="search_again">
-            Have more accounts? <span id="emph">Go ahead, be a cold-hearted $*&@#%.</span> Search for more accounts to find who is clogging up your twitter stream.
-            <div class="form">
-              <form action="submit" method="get">
-      	        <input type="text" name="username" id="input_username" value="Twitter handle"><br>
-      	        <input type="submit" value="Submit" id="submit_button">
-              </form>    
-            </div>
-        </div><!-- end search_again -->
-      </div><!-- end container -->
-   
-      <div id="footer">
-      </div>
+	<div id="muffintop">
+		<div class="container">
+			<div class="title">Less Tweets</div>
+			<div class="user">@{{ username }}</div>
+			<div class="form">
+			  <form action="submit" method="get">
+				<input type="text" name="username" class="input_username" value="Search Again"><br>
+				<input type="submit" value="Submit" id="submit_button">
+			  </form>	 
+			</div>
+		</div>
+	</div>
+	
+	<div id="content">
+		<div class="container">
+		
+			<div class="stat">
+				<div class="stat_title">Number Tweets
+				</div>
+				<div class="stat_pic">
+				</div>
+				
+				<div class="stat_num">
+					{{int(round(per_day))}}
+				</div>
+				<div class="stat_text">
+					<a>average number of daily tweets</a>
+				</div>
+				<div class="stat_footer">
+					<a href="http://twitter.com/home?status=The+most+prolific+person+I+follow+is+@{{ friends[0][0] }}+at+{{ friends[0][1]['percent'] }}%+of+my+daily+tweets.+What's+yours?+{{ url }}">Tweet this</a> |
+					<a href="http://twitter.com/home?status=DM+{{ friends[0][0] }}+You+are+the+most+prolific+person+I+follow+at+{{ friends[0][1]['percent'] }}%+of+my+daily+tweets.+I+cannot+keep+up!+Determined+by+{{ url }}">Warn them</a>
+				</div>
+			</div>
 
-    </div><!-- end content -->
-    </div><!-- end main -->
+			<div class="stat">
+				<div class="stat_title">Most Prolific
+				</div>
+				<div class="stat_pic">
+				</div>
+				<div class="stat_num">
+					{{ friends[0][1]['percent'] }} <a href="http://www.twitter.com/{{ friends[0][0] }}">{{ friends[0][0] }}</a>
+				</div>
+				<div class="stat_text">
+					<a>percentage of your daily tweets</a>
+				</div>
+				<div class="stat_footer">
+					<a href="http://twitter.com/home?status=The+most+prolific+person+I+follow+is+@{{ friends[0][0] }}+at+{{ friends[0][1]['percent'] }}%+of+my+daily+tweets.+What's+yours?+{{ url }}">Tweet this</a> |
+					<a href="http://twitter.com/home?status=DM+{{ friends[0][0] }}+You+are+the+most+prolific+person+I+follow+at+{{ friends[0][1]['percent'] }}%+of+my+daily+tweets.+I+cannot+keep+up!+Determined+by+{{ url }}">Warn them</a>
+				</div>
+			</div>
+
+			<div class="stat">
+				<div class="stat_title">Speeding Up
+				</div>
+				<div class="stat_pic">
+				</div>
+				
+				<div class="stat_num">
+					{{int(round(per_day))}}
+				</div>
+				<div class="stat_text">
+					<a>tweets received each day</a>
+				</div>
+				<div class="stat_footer">
+					<a href="http://twitter.com/home?status=The+most+prolific+person+I+follow+is+@{{ friends[0][0] }}+at+{{ friends[0][1]['percent'] }}%+of+my+daily+tweets.+What's+yours?+{{ url }}">Tweet this</a> |
+					<a href="http://twitter.com/home?status=DM+{{ friends[0][0] }}+You+are+the+most+prolific+person+I+follow+at+{{ friends[0][1]['percent'] }}%+of+my+daily+tweets.+I+cannot+keep+up!+Determined+by+{{ url }}">Warn them</a>
+				</div>
+			</div>
+
+			<div class="stat">
+				<div class="stat_title">Dropped Off
+				</div>
+				<div class="stat_pic">
+				</div>
+				
+				<div class="stat_num">
+					{{int(round(per_day))}}
+				</div>
+				<div class="stat_text">
+					<a>tweets received each day</a>
+				</div>
+				<div class="stat_footer">
+					<a href="http://twitter.com/home?status=The+most+prolific+person+I+follow+is+@{{ friends[0][0] }}+at+{{ friends[0][1]['percent'] }}%+of+my+daily+tweets.+What's+yours?+{{ url }}">Tweet this</a> |
+					<a href="http://twitter.com/home?status=DM+{{ friends[0][0] }}+You+are+the+most+prolific+person+I+follow+at+{{ friends[0][1]['percent'] }}%+of+my+daily+tweets.+I+cannot+keep+up!+Determined+by+{{ url }}">Warn them</a>
+				</div>
+			</div>
+
+		 
+			<div class="clear"></div>
+		
+		
+			<div id="table">
+				<div class="maintable">
+				  <table id="frequency_table" class="tablesorter">
+					<thead>
+					  <tr>
+						<th>Screen Name</th>
+						<th>Frequency</th>
+						<th>Percent</th>
+						<th>Total Tweets</th>
+						<th>Tweeting Since</th>
+						<th>Tweet</th>
+					  </tr>
+					</thead>
+					<tbody>
+						{% for friend in friends %}
+						<tr>
+						<td><a href="http://www.twitter.com/{{ friend[0] }}">{{ friend[0] }}</a></td>
+						<td>{{ friend[1]['frequency'] }}</td>
+						<td>{{ friend[1]['percent'] }}%</td>
+						<td>{{ friend[1]['statuses'] }}</td>
+						<td>{{ friend[1]['created'] }}</td>	  
+						<td><a href="http://twitter.com/home?status=.@{{ friend[0] }}+is+ranked+number+{{ friend[1]['created'] }}+of+the+most+prolific+people+I+follow+at+{{ friend[1]['percent'] }}%+of+my+daily+tweets.+What's+yours?+{{ url }}">Share</a></td>
+						</tr>
+						{% end %}
+					</tbody>
+				  </table>
+				</div><!-- end maintable -->
+			</div>	 
+			<div id="right_nav">
+			
+			
+			</div>
+			
+		</div><!-- end container -->
+	</div><!-- end content -->   
+	
+	<div id="footer">
+	</div>
+
+
+	
   </body>
 </html>

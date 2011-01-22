@@ -2,45 +2,69 @@
 body {
     font-size: 24px;
     color: #333333;
-    text-align: center;
+	margin: 0px;
 }
 
 .container {
     margin: 0 auto; 
-    width:800px;
+    width: 1000px;
 }
 
 #header {
     //height: 50px; 
-    margin-top: 10px;
+    text-align: left;
+	margin-top: 10px;
     margin-bottom: 10px;
     padding-top: 20px;
 }
 
 #footer {
-    height: 50px;
-    
+    height: 100px;
+ 	width: 100%;
+    background-color: gray;
 }
 
 #main {
-    width: 90%;
+    width: 100%;
     margin: auto;
     //background: #ffeeff;
+	background: #44ddff;
     height: 100%;
     margin-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
     //-moz-border-radius: 4px; 
     //-webkit-border-radius: 4px;    
-	-moz-border-radius: 35px 35px 35px 35px;
-	-webkit-border-radius: 35px 35px 35px 35px;
-	background: -moz-linear-gradient(center top, #44ddff 0%,#ffffff 28%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #44ddff),color-stop(0.72, #ffffff));
+	//-moz-border-radius: 35px 35px 35px 35px;
+	//-webkit-border-radius: 35px 35px 35px 35px;
+	//background: -moz-linear-gradient(center top, #44ddff 0%,#ffffff 28%);
+	//background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #44ddff),color-stop(0.72, #ffffff));
 }
 
-#perday {
-    margin-top:20px;
-    margin-bottom: 20px;
+#muffintop {
+	height: 50px;
+	width: 100%;
+	background-color: gray;
+	color: #44ddff;
+	
+}
+
+#muffintop .title {
+	font-size: 40px;
+	width: 40%;
+	float: left;
+	font-family: 'Lobster', arial, serif;
+	
+}
+
+#muffintop .user {
+	width: 30%;
+	float: left;
+	margin-top: 10px;
+}
+#muffintop .input_username {
+	height: 46px;
+	float: right;	
 }
 
 .description {
@@ -58,7 +82,7 @@ body {
     color: #666666;
 }
 
-#input_username {
+.input_username {
     width: 300px;
     height: 60px;
     font-size: 28px;
@@ -69,6 +93,8 @@ body {
     -webkit-border-radius: 10px;
 //    background: #33ccff;
     background: #44ddff;
+	font-family: 'Lobster', arial, serif;
+
 }
 
 #chart {
@@ -81,10 +107,51 @@ body {
     outline: none;
 }
 
-#prolific{
-    padding: 15px;
-    float: right;
-    width: 30%;    
+#content .container {
+	width: 912px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.stat{
+    padding: 10px;
+    float: left;
+    width: 200px; 
+  	text-align: center;
+	margin: 5px;
+    -moz-border-radius: 10px; 
+    -webkit-border-radius: 10px;
+	background: #ddf9ff;
+}
+
+.stat_title{
+	text-align: left;
+	font-family: 'Lobster', arial, serif;
+	
+	
+}
+
+.stat_num{
+	font-size: 72px;
+	height: 75px;
+	
+}
+.stat_text{
+	font-size: 16px;
+	
+}
+
+.stat_footer{
+	font-size: 14px;
+	margin-top: 10px;
+	
+}
+
+.stat_pic {
+	width: 100px;
+	height: 100px;
+	background-color: gray;
+	margin: 0 auto;
 }
 
 #graph {
@@ -104,10 +171,23 @@ body {
     padding-right: 150px;
 }
 
+/* right_nav */
+#right_nav {
+	width: 400px;
+	float: left;
+	background-color: gray;
+	
+}
+
+
 /* tables */
 
+#table {
+	width: 600px;
+}
+
 .maintable {
-    width: 60%;
+    width: 100%;
     float: left;
 
 }

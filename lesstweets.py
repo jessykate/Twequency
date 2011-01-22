@@ -9,7 +9,7 @@
 # ./main.py
 # and visit localhost:8888
 
-DEBUG = False
+DEBUG = True
 
 import tornado.httpserver
 import tornado.ioloop
